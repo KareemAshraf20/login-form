@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Form</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Basic reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f4f4f4;
+}
+
+.login-container {
+  background-color: white;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.input-container {
+  margin-bottom: 15px;
+}
+
+label {
+  display: block;
+  font-size: 14px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+input {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+button {
+  width: 100%;
+  padding: 12px;
+  background-color: #007bff;
+  color: white;
+  font-size: 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+.error-message {
+  color: red;
+  font-size: 12px;
+  margin-top: 5px;
+}
+
+    </style>
+</head>
+
+<body>
+    <div class="login-container">
+        <h2>Login</h2>
+        <form id="login-form" action="#" method="post">
+            <div class="input-container">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required placeholder="Enter your username">
+                <span id="username-error" class="error-message"></span>
+            </div>
+            <div class="input-container">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required placeholder="Enter your password">
+                <span id="password-error" class="error-message"></span>
+            </div>
+            <button type="submit">Login</button>
+        </form>
+    </div>
+
+    <script>
+        // DOM Elements
+            const loginForm = document.getElementById('login-form');
+            const usernameInput = document.getElementById('username');
+            const passwordInput = document.getElementById('password');
+            const usernameError = document.getElementById('username-error');
+            const passwordError = document.getElementById('password-error');
+
+            // Validate username and password
+            function validateForm(event) {
+                let isValid = true;
+
+                // Clear previous error messages
+                usernameError.textContent = '';
+                passwordError.textContent = '';
+
+                // Validate username (must not be empty and must be at least 3 characters)
+                if (usernameInput.value.trim() === '') {
+                    usernameError.textContent = 'Username is required';
+                    isValid = false;
+                } else if (usernameInput.value.length < 3) {
+                    usernameError.textContent = 'Username must be at least 3 characters';
+                    isValid = false;
+                }
+
+                // Validate password (must not be empty and must be at least 6 characters)
+                if (passwordInput.value.trim() === '') {
+                    passwordError.textContent = 'Password is required';
+                    isValid = false;
+                } else if (passwordInput.value.length < 6) {
+                    passwordError.textContent = 'Password must be at least 6 characters';
+                    isValid = false;
+                }
+
+                // If any field is invalid, prevent form submission
+                if (!isValid) {
+                    event.preventDefault();
+                }
+            }
+
+            // Attach form submission event listener
+            loginForm.addEventListener('submit', validateForm);
+
+    </script>
+</body>
+
+</html>
